@@ -1,4 +1,10 @@
-#Apache confing 設定
+#Apache 2.4 confing 設定
+
+###apache 安裝 
+```
+sudo apt-get updates
+sudo apt-get install apache2
+```
 
 ###將原本的000-default.conf複製一份my.conf來編緝.
 ```
