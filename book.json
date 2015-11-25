@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    "codepen"
+  ],
+  "pluginsConfig": {
+    "codepen": {
+      "height": 400,
+      "theme": 14038,
+      "description": "somepen",
+      "defaultTab": "html"
+    }
+  }
+}
