@@ -1,1 +1,1 @@
-[](codepen://madewithcode/bVymJV?height=800&theme=0)
+[](codepen://madewithcode/bVymJV)

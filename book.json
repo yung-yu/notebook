@@ -1,6 +1,8 @@
 {
   "plugins": [
-    "codepen"
+    "codepen",
+    "youtube",
+    "share"
   ],
   "pluginsConfig": {
     "codepen": {
@@ -8,6 +10,12 @@
       "theme": 14038,
       "description": "somepen",
       "defaultTab": "html"
+    },
+    "share": {
+      "reddit": {
+        "newwindow": 1
+      }
     }
+   
   }
 }
