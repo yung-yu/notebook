@@ -110,31 +110,30 @@
 
 	
 		<div class="markdown-body">
-		<h1>On My Zsh</h1>
+		<h1>Android 用Post方式開啟外部瀏覽器</h1>
 
-		<h2 id="toc_0">安裝 git</h2>
+		<ul>
+<li>可以使用<strong><em>data:html/text;+Html的URL ENCODE字串轉換成Uri</em></strong>,給外部瀏覽器使用。</li>
+<li>利用html的form TAG帶入要POST參數內容，利用window.onload開啟時,自動執行submit。</li>
+<li>這樣就可以post方式讓外部瀏覽器,去開啟一個網頁.</li>
+</ul>
 
-<pre><code>sudo apt-get install git
+<h2 id="toc_0">範例:</h2>
+
+<pre><code>StringBuilder htmlUrl = new StringBuilder();
+htmlUrl.append(&quot;&lt;html&gt;&lt;body onLoad=&quot;document.getElementById(&#39;form&#39;).submit()&quot; &gt;&quot;);
+htmlUrl.append(&quot;&lt;form id=&quot;form&quot; method=&quot;post&quot; action=&quot;網址&quot;&gt;&quot;);
+htmlUrl.append(&quot;&lt;input type=&quot;hidden&quot; name=&quot;p1&quot; value=&quot;v1&quot;&gt;&quot;);
+htmlUrl.append(&quot;&lt;input type=&quot;hidden&quot; name=&quot;p2&quot; value=&quot;v2&quot;&gt;&quot;);
+htmlUrl.append(&quot;&lt;/form&gt;&quot;);
+htmlUrl.append(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);
+
+Uri uri = Uri.paser(&quot;data:html/text;&quot;
++URLEncoder.encode(htmlUrl.toString(),&quot;utf-8&quot;).replaceAll(&quot;\\+&quot;,&quot; &quot;));
+
+Intent it = new Intent(Intent.ACTION_VIEW, uri);
+startActivity(it);
 </code></pre>
-
-<h2 id="toc_1">安裝 zsh</h2>
-
-<pre><code>sudo apt-get install zsh
-</code></pre>
-
-<h2 id="toc_2">到/bin  folder看看有沒有zsh 檔案</h2>
-
-<h2 id="toc_3">然後執行</h2>
-
-<pre><code>curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash
-</code></pre>
-
-<h2 id="toc_4">最後設定</h2>
-
-<pre><code>sudo chsh ubuntu -s zsh
-</code></pre>
-
-<h2 id="toc_5">然後重新連上EC2看看有沒有成功</h2>
 
 
 		</div>
