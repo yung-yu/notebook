@@ -116,19 +116,24 @@
 
 <h2 id="toc_0">範例:</h2>
 
-<pre><code>StringBuilder htmlUrl = new StringBuilder();
-htmlUrl.append(&quot;&lt;html&gt;&lt;body onLoad=&quot;document.getElementById(&#39;form&#39;).submit()&quot; &gt;&quot;);
-htmlUrl.append(&quot;&lt;form id=&quot;form&quot; method=&quot;post&quot; action=&quot;網址&quot;&gt;&quot;);
-htmlUrl.append(&quot;&lt;input type=&quot;hidden&quot; name=&quot;p1&quot; value=&quot;v1&quot;&gt;&quot;);
-htmlUrl.append(&quot;&lt;input type=&quot;hidden&quot; name=&quot;p2&quot; value=&quot;v2&quot;&gt;&quot;);
-htmlUrl.append(&quot;&lt;/form&gt;&quot;);
-htmlUrl.append(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);
+<pre><code> StringBuilder htmlUrl = new StringBuilder();
+        htmlUrl.append(&quot;&lt;html&gt;&lt;body onLoad=\&quot;document.getElementById(&#39;form&#39;).submit()\&quot; &gt;&quot;);
+        htmlUrl.append(&quot;&lt;form id=\&quot;form\&quot; method=\&quot;post\&quot; action=\&quot;網址\&quot;&gt;&quot;);
+        htmlUrl.append(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;p1\&quot; value=\&quot;v1\&quot;&gt;&quot;);
+        htmlUrl.append(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;p2\&quot; value=\&quot;v2\&quot;&gt;&quot;);
+        htmlUrl.append(&quot;&lt;/form&gt;&quot;);
+        htmlUrl.append(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);
 
-Uri uri = Uri.paser(&quot;data:html/text;&quot;
-+URLEncoder.encode(htmlUrl.toString(),&quot;utf-8&quot;).replaceAll(&quot;\\+&quot;,&quot; &quot;));
+        Uri uri = null;
+        try {
+            uri = Uri.parse(&quot;data:html/text,&quot;
+                    + URLEncoder.encode(htmlUrl.toString(),&quot;utf-8&quot;).replaceAll(&quot;\\+&quot;,&quot;%20&quot;));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
-Intent it = new Intent(Intent.ACTION_VIEW, uri);
-startActivity(it);
+        Intent it = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(it);
 </code></pre>
 
 
