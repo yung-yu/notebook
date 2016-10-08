@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Mysql 設定 - Andy程式筆記
+  FireBase-Android - Andy程式筆記
   
   </title>
  <meta name="description" content="記錄平常碰到的問題。">
@@ -122,38 +122,51 @@
             <div class="large-9 medium-9 columns">
 
  <div class="markdown-body">
-<h1>Mysql 設定</h1>
+<h1>FireBase-Android</h1>
 
-<h2 id="toc_0">mysql 安裝</h2>
+<ul>
+<li>1. 在<a href="https://console.firebase.google.com/">FireBase控制台</a>建立專案<img src="media/14759171721895/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-10-08%20%E4%B8%8B%E5%8D%885.05.40.png" alt="螢幕快照 2016-10-08 下午5.05.40"/></li>
+<li>2. 下載google-services.json到Project</li>
+<li>3. 在專案的build.gradle加入以下code,導入google services plugin </li>
+</ul>
 
-<pre><code>sudo apt-get update
-sudo apt-get install mysql-server mysql-client
+<pre><code>buildscript {
+    // ...
+    dependencies {
+        // ...
+        classpath &#39;com.google.gms:google-services:3.0.0&#39;
+    }
+}
 </code></pre>
 
-<h2 id="toc_1">mysql config 設定</h2>
+<ul>
+<li>4.在moudle的Build.gradle中加入</li>
+</ul>
 
-<pre><code>sudo vim /etc/mysql/my.cnf
+<pre><code>apply plugin: &#39;com.android.application&#39;
+
+android {
+  // ...
+}
+
+dependencies {
+  // ...
+  compile &#39;com.google.firebase:firebase-core:9.6.1&#39;
+  // Getting a &quot;Could not find&quot; error? Make sure you have
+  // the latest Google Repository in the Android SDK manager
+}
+
+// 這行一定要放在dependencies後面,不然會出錯,原因不知道...
+apply plugin: &#39;com.google.gms.google-services&#39;
 </code></pre>
 
-<h2 id="toc_2">my.conf 修改</h2>
+<ul>
+<li>5.這樣就完成基本的設定,可以開始玩FireBase</li>
+</ul>
 
-<pre><code>//讓所有ip都可以連
-bind_address = 0.0.0.0
-</code></pre>
+<hr/>
 
-<h2 id="toc_3">開啟mysql</h2>
-
-<pre><code>sudo service mysql start
-</code></pre>
-
-<h2 id="toc_4">登入msql</h2>
-
-<pre><code>mysql -u root -p
-</code></pre>
-
-<h2 id="toc_5">測試看看有沒有成功</h2>
-
-<h2 id="toc_6">如果要從外部遠端連線進來就必須要到AWSEC2的控制台在Security Groups中找到機器對應的項目中到Inbound中編輯開啟port</h2>
+<p><a href="https://firebase.google.com/docs/android/setup">官方教學</a></p>
 
 
 </div>
@@ -165,15 +178,15 @@ bind_address = 0.0.0.0
   <div class="large-6 columns">
 	<div class="text-left" style="padding:15px 0px;">
 		
-	        <a href="14759172090787.html"  title="Previous Post: Firebase Auth - Google login">&laquo; Firebase Auth - Google login</a>
+	        <a href="14745560857876.html"  title="Previous Post: Apache 2.4 confing 設定">&laquo; Apache 2.4 confing 設定</a>
 	    
 	</div>
   </div>
   <div class="large-6 columns">
 	<div class="text-right" style="padding:15px 0px;">
 		
-	        <a href="14745562093269.html" 
-	        title="Next Post: On My Zsh">On My Zsh &raquo;</a>
+	        <a href="14759171721895.html" 
+	        title="Next Post: Firebase Auth - Email login">Firebase Auth - Email login &raquo;</a>
 	    
 	</div>
   </div>
@@ -186,7 +199,7 @@ bind_address = 0.0.0.0
 </div>
 <script type="text/javascript">
 	$(function(){
-		var currentURL = '14745560868116.html';
+		var currentURL = '14759179598313.html';
 		$('#side-nav a').each(function(){
 			if($(this).attr('href') == currentURL){
 				$(this).parent().addClass('active');
