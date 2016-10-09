@@ -124,6 +124,92 @@
  <div class="markdown-body">
 <h1>Firebase Auth - Google login</h1>
 
+<p>使用Firebase來做Google Login,</p>
+
+<ul>
+<li>1.在dependencies加入</li>
+</ul>
+
+<pre><code>dependencies {
+ compile &#39;com.google.firebase:firebase-auth:9.6.1&#39;
+ compile    compile &#39;com.google.android.gms:play-services-auth:9.6.1&#39;
+}
+</code></pre>
+
+<ul>
+<li>2.再來就是要處理Google Auth Login流程</li>
+</ul>
+
+<pre><code>  //建立請求項目
+GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .requestProfile()
+                .build();
+                //建立GoogleApiClient物件 GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this , this )
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        //發出Auth login ,會跑出google帳號選單
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, GOOGLE_AUTH_REQUEST_CODE);
+</code></pre>
+
+<ul>
+<li>3.最後在onActivityＲesult取得結果</li>
+</ul>
+
+<pre><code>@Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == GOOGLE_AUTH_REQUEST_CODE) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account);
+            }
+        }
+    }
+</code></pre>
+
+<ul>
+<li>4. 最後取得GoogleSignInAccount物件丟給FireBase處理,就完成登入</li>
+</ul>
+
+<pre><code>private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        Log.d(TAG, &quot;firebaseAuthWithGoogle:&quot; + acct.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener&lt;AuthResult&gt;() {
+                    @Override
+                    public void onComplete(@NonNull Task&lt;AuthResult&gt; task) {
+                        Log.d(TAG, &quot;signInWithCredential:onComplete:&quot; + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, &quot;signInWithCredential&quot;, task.getException());
+                            Toast.makeText(LoginActivity.this, &quot;Authentication failed.&quot;,
+                                    Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(LoginActivity.this, &quot;login success&quot;,
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        // ...
+                    }
+                });
+    }
+</code></pre>
+
+<hr/>
+
+<p><a href="https://firebase.google.com/docs/auth/android/google-signin">FireBase官方教學</a><br/>
+<a href="https://developers.google.com/identity/sign-in/android/sign-in">Google sign-in Android官方教學</a></p>
 
 
 </div>

@@ -124,6 +124,95 @@
  <div class="markdown-body">
 <h1>Firebase Auth - Facebook login</h1>
 
+<p>使用Firebase來做FaceBook Ｌogin,<br/>
+先弄好Facebook開發者帳號和建立開發專案且取得應用程式ID和密鑰。</p>
+
+<p><img src="media/14759172328306/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-10-09%20%E4%B8%8B%E5%8D%887.59.57.png" alt="螢幕快照 2016-10-09 下午7.59.57"/><br/>
+* 1.在dependencies加入</p>
+
+<pre><code>dependencies {
+ compile &#39;com.google.firebase:firebase-auth:9.6.1&#39;
+ compile &#39;com.facebook.android:facebook-android-sdk:4.16.0&#39;
+}
+</code></pre>
+
+<p>2.先處理好Facebook登入,必要處理.</p>
+
+<pre><code> protected void onCreate(@Nullable Bundle savedInstanceState) {
+        FacebookSdk.sdkInitialize(this);
+        super.onCreate(savedInstanceState);
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(&quot;email&quot;, &quot;public_profile&quot;);
+
+        loginButton.registerCallback(mCallbackManager, new FacebookCallback&lt;LoginResult&gt;() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG, &quot;facebook:onSuccess:&quot; + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, &quot;facebook:onCancel&quot;);
+                // ...
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, &quot;facebook:onCancel&quot;+error.toString());
+
+            }
+
+
+        });
+}        
+        
+ @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode,resultCode,data);
+        //...
+        }        
+</code></pre>
+
+<ul>
+<li>3.最後取得Facebook的Ａuth token,然後找以下方式就完成登入了,登入成功後可以取的FirebaseUser物件</li>
+</ul>
+
+<pre><code>
+    private void handleFacebookAccessToken(AccessToken token) {
+        Log.d(TAG, &quot;handleFacebookAccessToken:&quot; + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener&lt;AuthResult&gt;() {
+                    @Override
+                    public void onComplete(@NonNull Task&lt;AuthResult&gt; task) {
+                        Log.d(TAG, &quot;signInWithCredential:onComplete:&quot; + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, &quot;signInWithCredential&quot;, task.getException());
+                            Toast.makeText(LoginActivity.this, &quot;Authentication failed.&quot;,
+                                    Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(LoginActivity.this, &quot;login success&quot;,
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                    }
+                });
+    }
+</code></pre>
+
+<hr/>
+
+<p><a href="https://firebase.google.com/docs/auth/android/facebook-login">FireBase官方教學</a><br/>
+<a href="https://developers.facebook.com/docs/facebook-login/android">FaceBook Login官方教學</a></p>
 
 
 </div>
