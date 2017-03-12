@@ -47,15 +47,17 @@
         <li><label>Android</label></li>
 
           
+            <li><a title="Android 用Post方式開啟外部瀏覽器" href="14745560509829.html">Android 用Post方式開啟外部瀏覽器</a></li>
+          
             <li><a title="FireBase-Android" href="14759179598313.html">FireBase-Android</a></li>
+          
+            <li><a title="FireBase-real DataBase" href="14760830127386.html">FireBase-real DataBase</a></li>
+          
+            <li><a title="Firebase Auth - Email login" href="14759171721895.html">Firebase Auth - Email login</a></li>
           
             <li><a title="Firebase Auth - Facebook login" href="14759172328306.html">Firebase Auth - Facebook login</a></li>
           
             <li><a title="Firebase Auth - Google login" href="14759172090787.html">Firebase Auth - Google login</a></li>
-          
-            <li><a title="Firebase Auth - Email login" href="14759171721895.html">Firebase Auth - Email login</a></li>
-          
-            <li><a title="Android 用Post方式開啟外部瀏覽器" href="14745560509829.html">Android 用Post方式開啟外部瀏覽器</a></li>
           
 
       
@@ -63,13 +65,21 @@
         <li><label>Mac</label></li>
 
           
+            <li><a title="Apache 2.4 confing 設定" href="14745560857876.html">Apache 2.4 confing 設定</a></li>
+          
+            <li><a title="Mysql 設定" href="14745560868116.html">Mysql 設定</a></li>
+          
             <li><a title="On My Zsh" href="14745562093269.html">On My Zsh</a></li>
           
             <li><a title="PHP安裝" href="14745560878356.html">PHP安裝</a></li>
           
-            <li><a title="Mysql 設定" href="14745560868116.html">Mysql 設定</a></li>
+
+      
+        <li class="divider"></li>
+        <li><label>Android Studio tip</label></li>
+
           
-            <li><a title="Apache 2.4 confing 設定" href="14745560857876.html">Apache 2.4 confing 設定</a></li>
+            <li><a title="讓layout可以同時看實際畫面和XML內容" href="14893072916233.html">讓layout可以同時看實際畫面和XML內容</a></li>
           
 
       
@@ -90,27 +100,35 @@
                     
                       <li class="side-title"><span>Android</span></li>
                         
+                          <li><a title="Android 用Post方式開啟外部瀏覽器" href="14745560509829.html">Android 用Post方式開啟外部瀏覽器</a></li>
+                        
                           <li><a title="FireBase-Android" href="14759179598313.html">FireBase-Android</a></li>
+                        
+                          <li><a title="FireBase-real DataBase" href="14760830127386.html">FireBase-real DataBase</a></li>
+                        
+                          <li><a title="Firebase Auth - Email login" href="14759171721895.html">Firebase Auth - Email login</a></li>
                         
                           <li><a title="Firebase Auth - Facebook login" href="14759172328306.html">Firebase Auth - Facebook login</a></li>
                         
                           <li><a title="Firebase Auth - Google login" href="14759172090787.html">Firebase Auth - Google login</a></li>
                         
-                          <li><a title="Firebase Auth - Email login" href="14759171721895.html">Firebase Auth - Email login</a></li>
-                        
-                          <li><a title="Android 用Post方式開啟外部瀏覽器" href="14745560509829.html">Android 用Post方式開啟外部瀏覽器</a></li>
-                        
 
                     
                       <li class="side-title"><span>Mac</span></li>
+                        
+                          <li><a title="Apache 2.4 confing 設定" href="14745560857876.html">Apache 2.4 confing 設定</a></li>
+                        
+                          <li><a title="Mysql 設定" href="14745560868116.html">Mysql 設定</a></li>
                         
                           <li><a title="On My Zsh" href="14745562093269.html">On My Zsh</a></li>
                         
                           <li><a title="PHP安裝" href="14745560878356.html">PHP安裝</a></li>
                         
-                          <li><a title="Mysql 設定" href="14745560868116.html">Mysql 設定</a></li>
+
+                    
+                      <li class="side-title"><span>Android Studio tip</span></li>
                         
-                          <li><a title="Apache 2.4 confing 設定" href="14745560857876.html">Apache 2.4 confing 設定</a></li>
+                          <li><a title="讓layout可以同時看實際畫面和XML內容" href="14893072916233.html">讓layout可以同時看實際畫面和XML內容</a></li>
                         
 
                     
@@ -126,31 +144,56 @@
 
 	
 		<div class="markdown-body">
-		<h1>On My Zsh</h1>
+		<h1>Apache 2.4 confing 設定</h1>
 
-		<h2 id="toc_0">安裝 git</h2>
+		<h3 id="toc_0">apache 安裝</h3>
 
-<pre><code>sudo apt-get install git
+<pre><code>sudo apt-get updates
+sudo apt-get install apache2
 </code></pre>
 
-<h2 id="toc_1">安裝 zsh</h2>
+<h3 id="toc_1">將原本的000-default.conf複製一份my.conf來編緝.</h3>
 
-<pre><code>sudo apt-get install zsh
+<pre><code> sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/my.conf
 </code></pre>
 
-<h2 id="toc_2">到/bin  folder看看有沒有zsh 檔案</h2>
+<h3 id="toc_2">編輯my.conf</h3>
 
-<h2 id="toc_3">然後執行</h2>
-
-<pre><code>curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash
+<pre><code> sudo vim etc/apache2/sites-available/my.conf
 </code></pre>
 
-<h2 id="toc_4">最後設定</h2>
+<h3 id="toc_3">my.conf內容</h3>
 
-<pre><code>sudo chsh ubuntu -s zsh
+<pre><code>&lt;VirtualHost *:80&gt;
+  ServerAdmin yungyu405728@gmail.com
+
+  DocumentRoot /home/ubuntu/www/
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+  &lt;Directory /home/ubuntu/www/ &gt;
+ AllowOverride All
+      Require all granted
+      Allow from all
+&lt;/Directory&gt;
+&lt;/VirtualHost&gt;
 </code></pre>
 
-<h2 id="toc_5">然後重新連上EC2看看有沒有成功</h2>
+<h3 id="toc_4">將my.conf設定 sites-enabled</h3>
+
+<pre><code>sudo a2ensite my.conf
+</code></pre>
+
+<h3 id="toc_5">如果在sites-enabled還有其他conf記得刪掉</h3>
+
+<pre><code>sudo a2dissite 000-default.conf
+</code></pre>
+
+<h3 id="toc_6">最後將apache重啟</h3>
+
+<pre><code>sudo services apache2 restart
+</code></pre>
 
 
 		</div>
