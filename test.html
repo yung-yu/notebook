@@ -21,7 +21,7 @@ function testfun() {
          window.MPlus.doSDMPSuccess();
       }
         if(window.webkit != null){
-     window.webkit.messageHandlers.MPlus.postMessage({name: "doSDMPSuccess"});
+     window.webkit.messageHandlers.MPlus.postMessage({"name": "doSDMPSuccess"});
   }
 }
    function testfun2() {
