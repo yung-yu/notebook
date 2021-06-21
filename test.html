@@ -7,7 +7,12 @@
 
 <script>
 function testfun() {
-   Mplus.close();
+   if(window.Mplus != null){
+      window.Mplus.close();
+   }
+   if(window.webkit != null){
+     window.webkit.messageHandlers.test2.postMessage('close');
+  }
 }
 </script>
 
