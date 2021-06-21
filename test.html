@@ -21,7 +21,7 @@ function testfun() {
          window.MPlus.doSDMPSuccess();
       }
         if(window.webkit != null){
-     window.webkit.messageHandlers.MPlus.postMessage({"name": "doSDMPSuccess"});
+     window.webkit.messageHandlers.Mplus.postMessage({"name": "doSDMPSuccess"});
   }
 }
    function testfun2() {
@@ -29,7 +29,7 @@ function testfun() {
           window.MPlus.doSDMPFailWithMsg("01", "failed");
        }
           if(window.webkit != null){
-     window.webkit.messageHandlers.MPlus.postMessage({name: "doSDMPFailWithMsg", code: "01", msg: "failed"});
+     window.webkit.messageHandlers.Mplus.postMessage({name: "doSDMPFailWithMsg", code: "01", msg: "failed"});
   }
 }
       function testfun3() {
@@ -38,7 +38,7 @@ function testfun() {
             MPlus.doSDMPCancelWithMsg("02", "cancel");
        }
           if(window.webkit != null){
-     window.webkit.messageHandlers.MPlus.postMessage({name: "doSDMPCancelWithMsg", code: "02", msg: "cancel"});
+     window.webkit.messageHandlers.Mplus.postMessage({name: "doSDMPCancelWithMsg", code: "02", msg: "cancel"});
   }
 }
 </script>
