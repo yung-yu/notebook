@@ -17,13 +17,29 @@ function testfun() {
   }
 }
    function testfun1() {
-   MPlus.doSDMPSuccess();
+      if(window.Mplus != null){
+         window.MPlus.doSDMPSuccess();
+      }
+        if(window.webkit != null){
+     window.webkit.messageHandlers.Mplus.postMessage('doSDMPSuccess');
+  }
 }
    function testfun2() {
-    MPlus.doSDMPFailWithMsg("01", "failed");
+       if(window.Mplus != null){
+          window.MPlus.doSDMPFailWithMsg("01", "failed");
+       }
+          if(window.webkit != null){
+     window.webkit.messageHandlers.Mplus.postMessage('doSDMPFailWithMsg', "01", "failed" );
+  }
 }
       function testfun3() {
-       MPlus.doSDMPCancelWithMsg("02", "cancel");
+   
+            if(window.Mplus != null){
+            MPlus.doSDMPCancelWithMsg("02", "cancel");
+       }
+          if(window.webkit != null){
+     window.webkit.messageHandlers.Mplus.postMessage('doSDMPCancelWithMsg', "02", "cancel" );
+  }
 }
 </script>
 
