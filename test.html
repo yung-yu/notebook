@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <body>
-<button onclick="testfun()" >請點我( ^.＜ )</button>
-
+   <button onclick="testfun()" >請點我( ^.＜ )</button></br>
+<button onclick="testfun1()" >doSDMPSuccess</button></br>
+<button onclick="testfun2()" >doSDMPFailWithMsg</button></br>
+<button onclick="testfun3()" >doSDMPCancelWithMsg( ^.＜ )</button>           
 <p id="demo"></p>
 
 <script>
@@ -13,6 +15,15 @@ function testfun() {
    if(window.webkit != null){
      window.webkit.messageHandlers.Mplus.postMessage('close');
   }
+}
+   function testfun1() {
+   MPlus.doSDMPSuccess();
+}
+   function testfun2() {
+    MPlus.doSDMPFailWithMsg("01", "failed");
+}
+      function testfun3() {
+       MPlus.doSDMPCancelWithMsg("02", "cancel");
 }
 </script>
 
