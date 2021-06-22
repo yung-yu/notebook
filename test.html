@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <body>
-   <button onclick="testfun()" >請點我( ^.＜ )</button></br>
-<button onclick="testfun1()" >doSDMPSuccess</button></br>
-<button onclick="testfun2()" >doSDMPFailWithMsg</button></br>
+   <button onclick="testfun()" >請點我( ^.＜ )</button></br></br>
+   <button onclick="testClose_ios()" >請點我關閉iOS( ^.＜ )</button></br></br>
+<button onclick="testfun1()" >doSDMPSuccess</button></br></br>
+<button onclick="testfun2()" >doSDMPFailWithMsg</button></br></br>
 <button onclick="testfun3()" >doSDMPCancelWithMsg( ^.＜ )</button>           
 <p id="demo"></p>
 
 <script>
-function testfun() {
-   if(window.Mplus != null){
-      window.Mplus.close();
+   function testfun() {
+      if(window.Mplus != null){
+         window.Mplus.close();
+      }
    }
-   if(window.webkit != null){
-     window.webkit.messageHandlers.Mplus.postMessage('close');
-  }
-}
+
+
+   function testClose_ios() {
+      if(window.webkit != null){
+        window.webkit.messageHandlers.Mplus.postMessage('close');
+      }
+   }
+
    function testfun1() {
       if(window.MPlus != null){
          window.MPlus.doSDMPSuccess();
