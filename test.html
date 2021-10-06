@@ -6,7 +6,8 @@
    <button onclick="testClose_ios()" >請點我關閉iOS( ^.＜ )</button></br></br>
 <button onclick="testfun1()" >doSDMPSuccess</button></br></br>
 <button onclick="testfun2()" >doSDMPFailWithMsg</button></br></br>
-<button onclick="testfun3()" >doSDMPCancelWithMsg( ^.＜ )</button>           
+<button onclick="testfun3()" >doSDMPCancelWithMsg( ^.＜ )</button></br> 
+<button onclick="testfun3()" >原地跳頁</button> 
 <p id="demo"></p>
 
 <script>
@@ -47,6 +48,9 @@
           if(window.webkit != null){
      window.webkit.messageHandlers.Mplus.postMessage({name: "doSDMPCancelWithMsg", code: "02", msg: "cancel"});
   }
+         function goToSignFlowDetail(){
+           window.location.href='https://www.google.com/';
+         }
 }
 </script>
 
