@@ -5,6 +5,7 @@
 
 </header>
 <body onLoad="testClose_ios()">
+      <button onclick="testClose_android()" >請點我關閉android( ^.＜ )</button></br></br>
    <button onclick="testfun()" >請點我( ^.＜ )</button></br></br>
    <button onclick="testClose_ios()" >請點我關閉iOS( ^.＜ )</button></br></br>
 <button onclick="testfun1()" >doSDMPSuccess</button></br></br>
@@ -20,6 +21,11 @@
       }
    }
 
+   function testClose_android() {
+      if(window.MPlus != null){
+         window.MPlus.close();
+      }
+   }
 
    function testClose_ios() {
       if(window.webkit != null){
