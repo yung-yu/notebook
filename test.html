@@ -1,16 +1,41 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>使用 tel 打電話功能</title>
+  <title>測試 setAllowContentAccess</title>
 </head>
 <body>
-  <h1>使用 tel 打電話功能</h1>
-  <a href="tel:+886-912-345-678">撥打電話</a></br>
-  <a href="content://media/external/images/media"> Content</a></br>
-  <img src="file:///storage/self/primary/DCIM/Screenshots/Screenshot_20230117_102938_Settings.jpg" alt="圖片說明" width="200" height="100">
+  <h1>測試 setAllowContentAccess</h1>
+
   <p>
-    點擊上面的連結，即可撥打電話號碼 +886-912-345-678。
+    <input type="checkbox" id="allowContentAccess" checked>
+    允許訪問本地內容
   </p>
+
+  <script>
+    const allowContentAccess = document.getElementById("allowContentAccess");
+
+    function test() {
+      // 設定 allowContentAccess
+      if (allowContentAccess.checked) {
+        WebView.setAllowContentAccess(true);
+      } else {
+        WebView.setAllowContentAccess(false);
+      }
+
+      // 測試加載本地內容
+      const uri = "content://media/external/images/media";
+      const img = document.createElement("img");
+      img.src = uri;
+      document.body.appendChild(img);
+
+      // 測試獲取圖片尺寸
+      const img = document.querySelector("img");
+      const size = img.getNaturalWidth();
+      console.log("圖片尺寸：", size);
+    }
+
+    test();
+  </script>
 </body>
 </html>
