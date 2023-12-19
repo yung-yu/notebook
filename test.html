@@ -16,15 +16,8 @@
     const allowContentAccess = document.getElementById("allowContentAccess");
 
     function test() {
-      // 設定 allowContentAccess
-      if (allowContentAccess.checked) {
-        WebView.setAllowContentAccess(true);
-      } else {
-        WebView.setAllowContentAccess(false);
-      }
-
       // 測試加載本地內容
-      const uri = "content://media/external/images/media";
+      const uri = "content://media/external/images/media/1000001086";
       const img = document.createElement("img");
       img.src = uri;
       document.body.appendChild(img);
