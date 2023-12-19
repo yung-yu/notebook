@@ -7,28 +7,7 @@
 <body>
   <h1>測試 setAllowContentAccess</h1>
 
-  <p>
-    <input type="checkbox" id="allowContentAccess" checked>
-    允許訪問本地內容
-  </p>
+  <img src="content://media/external/images/media/1000001086" alt="圖片說明" width="200" height="100">
 
-  <script>
-    const allowContentAccess = document.getElementById("allowContentAccess");
-
-    function test() {
-      // 測試加載本地內容
-      const uri = "content://media/external/images/media/1000001086";
-      const img = document.createElement("img");
-      img.src = uri;
-      document.body.appendChild(img);
-
-      // 測試獲取圖片尺寸
-      const img = document.querySelector("img");
-      const size = img.getNaturalWidth();
-      console.log("圖片尺寸：", size);
-    }
-
-    test();
-  </script>
 </body>
 </html>
